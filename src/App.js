@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Carrinho from './components/Carrinho';
+import Filtro from './components/Filtro';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    listaDeProdutos: [],
+    listaDeProdutosCarrinho: [],
+    inputValorMaximo: '',
+    inputValorMinimo: '',
+    inputNome: ''
+  }
+
+  onChangeValorMinimo = (event) => {
+    this.setState({inputValorMinimo: event.target.value});
+  }
+
+  onChangeValorMaximo = (event) => {
+    this.setState({inputValorMaximo: event.target.value});
+  }
+
+  onChangeNome = (event) => {
+    this.setState({inputNome: event.target.value});
+  }
+
+  render(){
+
+    return (
+      <div className="App">
+        <Home />
+        <Carrinho />
+        <Filtro />
+      </div>
+    );
+  }
 }
 
 export default App;
