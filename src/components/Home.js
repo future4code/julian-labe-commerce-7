@@ -1,17 +1,62 @@
 import React from 'react';
+import styled from "styled-components";
 
-class Home extends React.Component {
+const ProdutosHome = styled.div`
+ display: flex;
+ flex-direction:row;
+ flex-wrap:wrap;
+text-align:center;
+margin-top: 10px;
+`
+const DivProdutos = styled.div`
+border:1px dotted #999;
+margin:10px;
+width:250px;
+`
+const Button = styled.button`
+border-style: none;
+width:180px;
+height: 40px;
+color: white;
+background-color: #000;
+margin-bottom: 5px;
+cursor:pointer;
+text-transform:uppercase;
+border-radius: 10px;
+`
+export class Home extends React.Component {
+// ordemCrescente = this.state.listaDeProdutos.sort((a,b) => {
+//   this.setState({ ordemCrescente: a.value - b.value})
+// })
+//   ordemDecrescente = this.state.listaDeProdutos.sort((a, b) => {
+//     this.setState({ ordemDecrescente: b.value - a.value })
+//   })
+//   onChangeOrdemFiltro = (event) => {
+//     this.setState({listar: event.target.value})
+//   }
+// ordemFiltro = (event) => {
+//   this.setState({ordem : event.target.value})
+//   }
 
-    
-  
     render(){
-  
-      return (
-        <div>
-            
-        </div>
-      );
-    }
+
+      const novaListaDeProdutos = this.props.listaDeProdutos.map((produto) => {
+        if(!produto.carrinho){
+          return <DivProdutos>
+            <img src={produto.imageUrl} />
+            <p>{produto.name}</p>
+            <p>Valor: R$ {produto.value}</p>
+            <Button onClick={() => this.props.adicionarProduto(produto.id, produto.name, produto.value, produto.imageUrl)}>Adicionar Carrinho</Button>
+          </DivProdutos>
+        }
+        return <DivProdutos>
+            <img src={produto.imageUrl} />
+            <p>{produto.name}</p>
+            <p>Valor: R$ {produto.value}</p>
+            <Button disabled>Já está no carrinho</Button>
+          </DivProdutos>
+      })
+      return <ProdutosHome> {novaListaDeProdutos} </ProdutosHome>
   }
-  
-  export default Home;
+}
+export default Home
