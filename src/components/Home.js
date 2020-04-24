@@ -25,18 +25,7 @@ text-transform:uppercase;
 border-radius: 10px;
 `
 export class Home extends React.Component {
-// ordemCrescente = this.state.listaDeProdutos.sort((a,b) => {
-//   this.setState({ ordemCrescente: a.value - b.value})
-// })
-//   ordemDecrescente = this.state.listaDeProdutos.sort((a, b) => {
-//     this.setState({ ordemDecrescente: b.value - a.value })
-//   })
-//   onChangeOrdemFiltro = (event) => {
-//     this.setState({listar: event.target.value})
-//   }
-// ordemFiltro = (event) => {
-//   this.setState({ordem : event.target.value})
-//   }
+
 
     render(){
 

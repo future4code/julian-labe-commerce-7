@@ -1,8 +1,71 @@
 import React from 'react';
 import './App.css';
+import car from './img/carrinho_compras.png'
+import logo from './img/labenu.png'
 import Home from './components/Home';
 import Carrinho from './components/Carrinho';
 import Filtro from './components/Filtro';
+import styled from "styled-components";
+
+
+const Topo = styled.div`
+height:50px;
+background-color: #000;
+`
+const Logo = styled.img`
+width : 200px;
+float:left;
+margin-top: 5px;
+margin-left: 10px;
+`
+const DivFiltros = styled.div`
+margin-top:20px;
+margin-left:15px;
+float:left;
+height:auto;
+width:300px;
+border: 1px solid #999;
+`
+const QuantidadeP = styled.p`
+text-align: left;
+margin-left:330px;
+`
+const DivSelect = styled.div`
+float:right;
+margin-right: 28px;
+margin-top: 10px;
+`
+const ProdutosHome = styled.div`
+display: flex;
+ flex-direction:row;
+ text-align:center;
+ justify-content:center;
+
+`
+const Footer = styled.div`
+width:100%;
+position: fixed;
+bottom: 0;
+`
+const Button = styled.button`
+border-style: none;
+width:180px;
+height: 40px;
+color: white;
+background-color: #000;
+margin-bottom: 5px;
+cursor:pointer;
+text-transform:uppercase;
+border-radius: 10px;
+`
+
+const CarCompras = styled.img`
+float:right;
+margin-right:20px;
+width: 80px;
+height: 80px;
+cursor:pointer;
+`
 
 class App extends React.Component {
 
@@ -95,7 +158,7 @@ class App extends React.Component {
         return produto
       }
     })
-    
+
     const novaListaDeProdutosCarrinho = [...this.state.listaDeProdutosCarrinho, listaDeProdutosClicada]
 
     this.setState({
@@ -187,13 +250,18 @@ class App extends React.Component {
     }
 
     const verificaCarrinho = this.state.carrinho
-    
+
     if(!verificaCarrinho){
       return <div className="App">
-        <Home 
-          listaDeProdutos={listaFiltrada}
-          adicionarProduto={this.adicionarProduto}/>
-        <button onClick={this.olharCarrinho}>Carrinho</button>
+        <Topo><Logo src={logo} alt={'Logo'}></Logo>
+          <DivSelect>
+            <select >
+              <option value={'crescente'} >Preço:  Crescente</option>
+              <option value={'decrescente'}>Preço:  Decrescente</option>
+            </select>
+          </DivSelect>
+        </Topo>
+        <DivFiltros>
         <Filtro
           valorMinimo={this.state.inputValorMinimo}
           valorMaximo={this.state.inputValorMaximo}
@@ -202,14 +270,24 @@ class App extends React.Component {
           onChangeValorMinimo={this.onChangeValorMinimo}
           onChangeNome={this.onChangeNome}
         />
+        </DivFiltros>
+
+        <ProdutosHome>
+        <Home
+          listaDeProdutos={listaFiltrada}
+          adicionarProduto={this.adicionarProduto}/>
+        </ProdutosHome>
+        <Footer><CarCompras src={car} alt={'Carrinho de Compras'} onClick={this.olharCarrinho} ></CarCompras></Footer>
+        {/* <button onClick={this.olharCarrinho}></button> */}
+
       </div>
     }return <div className="App">
-      <Carrinho 
+      <Carrinho
           listaDoCarrinho={this.state.listaDeProdutosCarrinho}
           diminuirQtd={this.diminuirQtd}
           aumentarQtd={this.aumentarQtd}
           removerProduto={this.removerProduto}/>
-        <button onClick={this.olharCarrinho}>Voltar</button>
+        <Button onClick={this.olharCarrinho}>Voltar</Button>
     </div>
   }
 }
