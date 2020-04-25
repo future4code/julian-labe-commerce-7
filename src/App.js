@@ -57,6 +57,7 @@ margin-bottom: 5px;
 cursor:pointer;
 text-transform:uppercase;
 border-radius: 10px;
+outline: 0;
 `
 
 const CarCompras = styled.img`
@@ -72,51 +73,51 @@ class App extends React.Component {
   state = {
     listaDeProdutos: [{
       id: 1,
-      name: "Foguete da Missão Apollo 11",
-      value: 10.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Eu não acredito em humanos",
+      value: 39.99,
+      imageUrl: "https://i.pinimg.com/originals/cc/f1/08/ccf108502bb418c94a0318df1df288d9.png",
     },
     {
       id: 2,
-      name: "Foguete da Missão Space-X",
-      value: 4.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Vaza não invada o meu espaço",
+      value: 29.99,
+      imageUrl: "https://img.elo7.com.br/product/zoom/24D276D/camiseta-camisa-vaza-nao-invade-meu-espaco-nagini.jpg",
     },
     {
       id: 3,
-      name: "Foguete da Missão Spotnik",
-      value: 3.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Marvin",
+      value: 69.99,
+      imageUrl: "https://img.elo7.com.br/product/zoom/1DADF67/camisa-camiseta-personalizada-desenho-marvin-o-marciano-marvin-el-marciano-cancion.jpg",
     },
     {
       id: 4,
-      name: "Foguete da Missão Spotnik 2",
-      value: 10000.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Star Wars",
+      value: 39.99,
+      imageUrl: "https://www.montink.com.br/image/cache/data/camisas/camisa-star-wars-icon-590020748e85a-470x668.jpg",
     },
     {
       id: 5,
-      name: "Foguete da Missão Apollo 11",
-      value: 9900.00,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Star Trek",
+      value: 49.99,
+      imageUrl: "https://http2.mlstatic.com/camiseta-raglan-star-trek-vida-longa-e-prospera-jornada-s201-D_NQ_NP_556621-MLB20804138996_072016-F.jpg",
     },
     {
       id: 6,
-      name: "Foguete da Missão Space-X",
-      value: 10000.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Nasa",
+      value: 59.99,
+      imageUrl: "https://d26lpennugtm8s.cloudfront.net/stores/001/112/372/products/mockup-camiseta-masculina-nasa-ef2a97687469d11df115820756943759-640-0.png",
     },
     {
       id: 7,
-      name: "Foguete da Missão Spotnik",
-      value: 8000.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Terapia",
+      value: 19.99,
+      imageUrl: "https://www.dhresource.com/600x600/f2/albu/g8/M01/38/C5/rBVaV15XepqAP4l6AAT197KQcZ0982.jpg",
     },
     {
       id: 8,
-      name: "Foguete da Missão Spotnik 2",
-      value: 100.0,
-      imageUrl: "https://picsum.photos/200/200",
+      name: "Thanos",
+      value: 49.99,
+      imageUrl: "https://http2.mlstatic.com/camisa-camiseta-guerra-infinita-thanos-manopla-do-infinito-D_NQ_NP_775976-MLB27073365891_032018-F.webp",
     }],
     listaDeProdutosCarrinho: [],
     inputValorMaximo: '',
@@ -230,6 +231,25 @@ class App extends React.Component {
     })
   }
 
+  onChangeOrdenar = (event) => {
+    if (event.target.value === 'crescente') {
+      const novaLista = [...this.state.listaDeProdutos].sort((a, b) => {
+        if (a.value < b.value) return -1
+        if (a.value > b.value) return 1
+        return 0
+      })
+      this.setState({ listaDeProdutos: novaLista })
+    } else if (event.target.value === 'decrescente') {
+      const novaLista = [...this.state.listaDeProdutos].sort((a, b) => {
+        if (a.value > b.value) return -1
+        if (a.value < b.value) return 1
+        return 0
+      })
+      this.setState({ listaDeProdutos: novaLista })
+
+    }
+  }
+
   render(){
 
     let listaFiltrada = this.state.listaDeProdutos;
@@ -255,7 +275,7 @@ class App extends React.Component {
       return <div className="App">
         <Topo><Logo src={logo} alt={'Logo'}></Logo>
           <DivSelect>
-            <select >
+            <select onChange={this.onChangeOrdenar}>
               <option value={'crescente'} >Preço:  Crescente</option>
               <option value={'decrescente'}>Preço:  Decrescente</option>
             </select>
@@ -278,7 +298,7 @@ class App extends React.Component {
           adicionarProduto={this.adicionarProduto}/>
         </ProdutosHome>
         <Footer><CarCompras src={car} alt={'Carrinho de Compras'} onClick={this.olharCarrinho} ></CarCompras></Footer>
-        {/* <button onClick={this.olharCarrinho}></button> */}
+
 
       </div>
     }return <div className="App">

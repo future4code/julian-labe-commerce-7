@@ -12,6 +12,7 @@ text-align:center;
 cursor:pointer;
 text-transform:uppercase;
 border-radius: 10px;
+outline: 0;
 `
 
 const ButtonSmall = styled.button`
