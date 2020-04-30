@@ -1,10 +1,25 @@
+*{
+  margin:0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
+select {
+  height: 30px;
+}
+button:hover {
+  background-color: #cc7e08;
+}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  border-style: none;
+  border-bottom: 1px solid #999;
+  box-shadow: 0 0 0 0;
+  outline: 0;
+  margin-left: 30px;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
